@@ -13,6 +13,7 @@ export default {
   data () {
     return {
       transports,
+      index: 1,
     }
   },
 
@@ -54,10 +55,14 @@ export default {
         }
       }
     },
-    emitChange (newTransport, oldTransport) {
+    emitChange (newTransition, oldTransition) {
+      if (!(oldTransition && newTransition && oldTransition.from === newTransition.from)) {
+        this.index++
+      }
+
       this.$emit('change',
-        { ...newTransport },
-        { ...oldTransport }
+        { ...newTransition },
+        { ...oldTransition }
       )
     },
   },
@@ -80,7 +85,8 @@ export default {
     if (this.renderSlim) {
       return children[0]
     } else {
-      return (<Tag class={'vue-portal-target'}>{children}</Tag>)
+      console.log(`TS: ${this.name} Rendering ${children.length} children ${this.index}`)
+      return (<transition name={'fade'}><Tag class={'vue-portal-target'} key={this.index}>{children}</Tag></transition>)
     }
   },
 }

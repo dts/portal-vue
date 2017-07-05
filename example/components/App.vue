@@ -42,4 +42,17 @@
   flex: 1 1 auto;
   padding: 25px;
 }
+
+.fade-leave-active , .fade-enter-active {
+  transition: opacity 300ms;
+}
+
+.fade-leave , .fade-enter-to {
+  opacity: 1;
+}
+
+.fade-enter, .fade-leave-to {
+  opacity: 0;
+}
+
 </style>
